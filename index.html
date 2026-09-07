@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laman Web Sekolah TS25</title>
+    
+    <!-- Menggunakan font Google Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+    
+    <style>
+        /* Gaya asas halaman */
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2d3748;
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .app-container {
+            width: 100%;
+            min-height: 100%;
+            background: #f7fafc;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem auto;
+            padding: 0 2rem;
+            gap: 3rem;
+        }
+
+        .logo-left, .logo-right {
+            flex: 0 0 auto;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background: white;
+            border-radius: 10px;
+            padding: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .school-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0 0.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .school-info {
+            font-size: 1rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active {
+            background: #2d3748;
+        }
+
+        /* Content Container */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        /* TS25 Grid */
+        .ts25-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ts25-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+
+        .ts25-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .ts25-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ts25-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .ts25-text {
+            font-size: 1rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Media */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            background: #f7fafc;
+        }
+
+        .qr-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .qr-code {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: white;
+            padding: 1rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #f0f0f0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .school-name {
+                font-size: 1.8rem;
+            }
+            .logo-row {
+                padding: 0 1rem;
+                gap: 2rem;
+            }
+            .logo-img {
+                width: 80px;
+                height: 80px;
+            }
+            .content {
+                padding: 2rem 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .nav {
+                padding: 1rem;
+            }
+            .nav-btn {
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+            }
+            .ts25-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-row">
+                <div class="logo-left">
+                    <img src="https://iili.io/Ky1xH3F.jpg" alt="Logo Sekolah" class="logo-img" onerror="this.style.display='none';">
+                </div>
+                <div class="logo-right">
+                    <img src="https://iili.io/fBTeTo7.png" alt="Logo TS25" class="logo-img" onerror="this.style.display='none';">
+                </div>
+            </div>
+            <h1 class="school-name" id="schoolName">Sekolah Kebangsaan Ulu Pelagus</h1>
+            <div class="school-info">
+                <p id="schoolAddress">Ulu Pelagus, 96800 Kapit, Sarawak</p>
+                <p>📞 <span id="schoolPhone">084-796 441</span> | ✉️ <span id="schoolEmail">sekolah-9105@moe-dl.edu.my</span></p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <!-- Fungsi onclick kini menghantar 'this' bagi mengelakkan ralat penunjuk (pointer) -->
+            <button class="nav-btn active" onclick="showSection('utama', this)">🏠 Utama</button>
+            <button class="nav-btn" onclick="showSection('sejarah', this)">📖 Sejarah</button>
+            <button class="nav-btn" onclick="showSection('target', this)">🎯 Target Pencapaian</button>
+            <button class="nav-btn" onclick="showSection('ts25', this)">⭐ TS25</button>
+            <button class="nav-btn" onclick="showSection('media', this)">📹 Media</button>
+            <button class="nav-btn" onclick="showSection('lokasi', this)">📍 Lokasi</button>
+        </nav>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Utama Section -->
+            <div id="utama" class="section active">
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🌟</span> Selamat Datang</h2>
+                    <p class="card-content">Selamat datang ke laman web rasmi sekolah kami. Kami komited untuk menyediakan pendidikan berkualiti tinggi dan membentuk generasi masa depan yang cemerlang.</p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🎯</span> Visi Sekolah</h2>
+                    <p class="card-content">Melahirkan murid yang berilmu, berakhlak dan aktif dalam pelbagai bidang.</p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">⭐</span> Misi Sekolah</h2>
+                    <p class="card-content">Membentuk kemenjadian murid secara holistik berdaya saing dan cemerlang dalam bidang akademik, sahsiah dan kokurikulum.</p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">📜</span> Motto Sekolah</h2>
+                    <p class="card-content">Ilmu Pedoman Hidup</p>
+                </div>
+            </div>
+
+            <!-- Sejarah Section -->
+            <div id="sejarah" class="section">
+                <div class="card">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <img src="https://iili.io/fBUA8QI.png" alt="Gambar Sekolah Kebangsaan Ulu Pelagus" style="width: 100%; max-width: 800px; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" onerror="this.style.display='none';">
+                    </div>
+                    <h2 class="card-title"><span class="card-icon">📚</span> Sejarah Sekolah</h2>
+                    <p class="card-content" id="schoolHistory">Sekolah Kebangsaan Ulu Pelagus terletak di hulu sungai pelagus dan bersempadan dengan Daerah Tatau Bintulu. Pada mulanya sebelum sekolah ini dibuka, kebanyakan penduduk di kawasan sekitarnya menghantar anak-anak mereka ke SK Nanga Pelagus yang terletak kira-kira 150km dari penempatan rumah panjang. Disebabkan masalah pengangkutan yang agak sukar maka dengan inisiatif ketua-ketua masyarakat setempat, maka sekolah ini ditubuhkan pada 1 Januari 1975. Sekarang majoriti pelajar-pelajarnya datang dari rumah panjang Ulu Sg. Anap, Tatau, Bintulu. Namun demi pendidikan anak-anak, ibubapa sanggup menghantar anak-anak ke sekolah kerana faktor pekerjaan serta jarak.</p>
+                </div>
+            </div>
+
+            <!-- Target Pencapaian Section -->
+            <div id="target" class="section">
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">📖</span> Target Pencapaian (Kurikulum)</h2>
+                    <p class="card-content">
+                        • 100% murid prasekolah menguasai 3M<br>
+                        • 0% buta huruf murid Tahun 6<br>
+                        • 0% murid pemulihan Tahap 2<br>
+                        • 80% TP3 ke atas PBD semua subjek
+                    </p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">👥</span> Target Pencapaian (Hal Ehwal Murid)</h2>
+                    <p class="card-content">
+                        • Kehadiran murid mencapai 95%<br>
+                        • 20% penyertaan murid asrama dalam program ASAT
+                    </p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🏆</span> Target Pencapaian (Kokurikulum)</h2>
+                    <p class="card-content">
+                        • Pencapaian prestasi kokurikulum yang tinggi<br>
+                        • Minimum 2 orang murid mewakili peringkat bahagian
+                    </p>
+                </div>
+            </div>
+
+            <!-- TS25 Section -->
+            <div id="ts25" class="section">
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🎯</span> Transformasi Sekolah 2025</h2>
+                    <p class="card-content">Program Transformasi Sekolah 2025 adalah inisiatif strategik sekolah untuk mencapai kecemerlangan menyeluruh dalam semua aspek pendidikan.</p>
+                </div>
+                <div class="ts25-grid">
+                    <div class="ts25-card">
+                        <div class="ts25-icon">👁️</div>
+                        <h3 class="ts25-title">Visi TS25</h3>
+                        <p class="ts25-text" id="ts25Vision">Menjadi sekolah unggul yang melahirkan pelajar holistik, inovatif dan berdaya saing global menjelang 2025.</p>
+                    </div>
+                    <div class="ts25-card">
+                        <div class="ts25-icon">🎯</div>
+                        <h3 class="ts25-title">Hala Tuju TS25</h3>
+                        <p class="ts25-text" id="ts25Mission">Beriltizam meningkatkan potensi murid secara holistik demi kemenjadian murid dalam sahsiah, pencapaian akademik dan kokurikulum.</p>
+                    </div>
+                    <div class="ts25-card">
+                        <div class="ts25-icon">🏅</div>
+                        <h3 class="ts25-title">Matlamat TS25</h3>
+                        <p class="ts25-text" id="ts25Goal">
+                            • Meningkatkan kecemerlangan murid melalui peningkatan kualiti PdP.<br>
+                            • Menaik taraf infrastruktur asas untuk mewujudkan PdP yang lebih berkesan.<br>
+                            • Kelestarian pemugaran kokurikulum untuk kemenjadian murid secara holistik.<br>
+                            • Mempraktikkan amalan terbaik dalam pengurusan sekolah.<br>
+                            • Mengeratkan hubungan kerjasama PIBG, NGO masyarakat dan komuniti setempat.
+                        </p>
+                    </div>
+                </div>
+                <div class="card qr-container">
+                    <h2 class="card-title"><span class="card-icon">📱</span> Pelan Strategik Sekolah 2024-2026</h2>
+                    <img id="qrCode" class="qr-code" src="https://iili.io/fBAz25l.png" alt="QR Code Pelan Strategik" onerror="this.style.display='none';">
+                    <p class="card-content" style="margin-top: 1rem;">Imbas QR Code untuk melihat dokumen penuh Pelan Strategik Sekolah 2024-2026</p>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">📋</span> Laporan Modul TS25</h2>
+                    <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                        <a href="https://drive.google.com/file/d/1yF2Kc4rYI4VOh3e8ULyW9PN1xutFAODD/view" target="_blank" class="map-button">📄 Modul 1</a>
+                        <a href="https://drive.google.com/file/d/1jORCPDH87jTlXhccLZtSuwv8M1MN_iI9/view" target="_blank" class="map-button">📄 Modul 2</a>
+                        <a href="https://drive.google.com/file/d/1ERYd0FwpU04h20Adlft1pVXjaZAyV9qP/view" target="_blank" class="map-button">📄 Modul 3</a>
+                        <a href="https://drive.google.com/file/d/1CqDzAU7BnoQTs08Pnu_sax-fZGZo5thi/view" target="_blank" class="map-button">📄 Modul 4</a>
+                        <a href="https://drive.google.com/file/d/1_FjCvc_jBSc072sut4uwc_UvwNDM1tZw/view" target="_blank" class="map-button">📄 Modul 5</a>
+                        <a href="https://drive.google.com/file/d/1GduJtixibbkSv7vE7pZ_EKv5rlp5CZ4-/view" target="_blank" class="map-button">📄 Modul 6</a>
+                        <a href="https://drive.google.com/file/d/1g1B8G6UwJqanyz1Ycx-aNahbT3fsTauA/view" target="_blank" class="map-button">📄 Modul 7</a>
+                        <a href="https://drive.google.com/file/d/1v6leKirbjtdtaaGNZNdI9VEEEg9gev_f/view" target="_blank" class="map-button">📄 Modul 8</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Section -->
+            <div id="media" class="section">
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🚗</span> Gambar Projek Modul 6 TS25 - Projek Reka Bentuk Kereta Idaman</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><img src="https://iili.io/fB7kbiQ.jpg" alt="Projek 1" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB78wjs.jpg" alt="Projek 2" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB7SsRt.jpg" alt="Projek 3" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB76zGa.jpg" alt="Projek 4" class="gallery-img"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🍊</span> Gambar Projek Modul 8 TS25 - Projek Jeruk Sihat</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item"><img src="https://iili.io/fB5AV8g.jpg" alt="Jeruk 1" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB5RN5u.jpg" alt="Jeruk 2" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB55fLl.jpg" alt="Jeruk 3" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB55jBp.jpg" alt="Jeruk 4" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB55Qa9.jpg" alt="Jeruk 5" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB57BwJ.jpg" alt="Jeruk 6" class="gallery-img"></div>
+                        <div class="gallery-item"><img src="https://iili.io/fB57ln4.jpg" alt="Jeruk 7" class="gallery-img"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lokasi Section -->
+            <div id="lokasi" class="section">
+                <div class="card">
+                    <h2 class="card-title"><span class="card-icon">🗺️</span> Lokasi Sekolah</h2>
+                    <div id="mapContainer" class="video-container" style="margin-bottom: 2rem;">
+                        <!-- Ditambah id='mapContainer' agar fungsi konfigurasi javascript boleh berhubung tanpe ralat -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.783796428102!2d113.0208689!3d2.2347754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3202cbb88035dbc7%3A0x43eb9f2619f76240!2sSekolah%20Kebangsaan%20Ulu%20Pelagus%2C%20Kapit!5e0!3m2!1sen!2smy!4v1234567890!5m2!1sen!2smy" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <p class="card-content" style="margin-top: 2rem;">
+                        📍 Alamat: <span id="locationAddress">Ulu Pelagus, 96800 Kapit, Sarawak</span><br>
+                        🚗 Lokasi terpencil di hulu sungai<br>
+                        🚤 Pengangkutan bot diperlukan
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">© 2026 <span id="footerSchoolName">Sekolah Kebangsaan Ulu Pelagus</span>. Hak Cipta Terpelihara.</p>
+            <p class="footer-text">Dicipta dengan ❤️ untuk pendidikan Malaysia</p>
+        </footer>
+    </div>
+
+    <script>
+        // Logik Fungsi Pertukaran Seksyen Tab
+        function showSection(sectionId, btnElement) {
+            // Sembunyikan semua seksyen
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Nyah-aktifkan semua butang
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Aktifkan seksyen yang dipilih
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Aktifkan butang yang ditekan
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+        }
+
+        // Data asas (Konfigurasi Asal)
+        const defaultConfig = {
+            school_name: "Sekolah Kebangsaan Ulu Pelagus",
+            school_address: "Ulu Pelagus, 96800 Kapit, Sarawak",
+            school_phone: "084-796 441",
+            school_email: "sekolah-9105@moe-dl.edu.my",
+            school_history: "Sekolah Kebangsaan Ulu Pelagus terletak di hulu sungai pelagus dan bersempadan dengan Daerah Tatau Bintulu. Pada mulanya sebelum sekolah ini dibuka, kebanyakan penduduk di kawasan sekitarnya menghantar anak-anak mereka ke SK Nanga Pelagus yang terletak kira-kira 150km dari penempatan rumah panjang. Disebabkan masalah pengangkutan yang agak sukar maka dengan inisiatif ketua-ketua masyarakat setempat, maka sekolah ini ditubuhkan pada 1 Januari 1975. Sekarang majoriti pelajar-pelajarnya datang dari rumah panjang Ulu Sg. Anap, Tatau, Bintulu. Namun demi pendidikan anak-anak, ibubapa sanggup menghantar anak-anak ke sekolah kerana faktor pekerjaan serta jarak.",
+            ts25_vision: "Menjadi sekolah unggul yang melahirkan pelajar holistik, inovatif dan berdaya saing global menjelang 2025.",
+            ts25_mission: "Beriltizam meningkatkan potensi murid secara holistik demi kemenjadian murid dalam sahsiah, pencapaian akademik dan kokurikulum.",
+            ts25_goal: "• Meningkatkan kecemerlangan murid melalui peningkatan kualiti PdP.\n• Menaik taraf infrastruktur asas untuk mewujudkan PdP yang lebih berkesan.\n• Kelestarian pemugaran kokurikulum untuk kemenjadian murid secara holistik.\n• Mempraktikkan amalan terbaik dalam pengurusan sekolah.\n• Mengeratkan hubungan kerjasama PIBG, NGO masyarakat dan komuniti setempat.",
+            google_maps_embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.783796434224!2d113.8!3d2.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3202cbb88035dbc7%3A0x43eb9f2619f76240!2sSekolah%20Kebangsaan%20Ulu%20Pelagus%2C%20Kapit!5e0!3m2!1sen!2smy!4v1234567890!5m2!1sen!2smy",
+            qr_code_url: "https://iili.io/fBAz25l.png"
+        };
+
+        // Fungsi kemaskini data secara dinamik
+        function updateContent(config) {
+            document.getElementById('schoolName').textContent = config.school_name || defaultConfig.school_name;
+            document.getElementById('schoolAddress').textContent = config.school_address || defaultConfig.school_address;
+            document.getElementById('schoolPhone').textContent = config.school_phone || defaultConfig.school_phone;
+            document.getElementById('schoolEmail').textContent = config.school_email || defaultConfig.school_email;
+            document.getElementById('schoolHistory').textContent = config.school_history || defaultConfig.school_history;
+            document.getElementById('ts25Vision').textContent = config.ts25_vision || defaultConfig.ts25_vision;
+            document.getElementById('ts25Mission').textContent = config.ts25_mission || defaultConfig.ts25_mission;
+            
+            // Format format teks baru
+            const goalText = config.ts25_goal || defaultConfig.ts25_goal;
+            document.getElementById('ts25Goal').innerHTML = goalText.replace(/\n/g, '<br>');
+            
+            document.getElementById('locationAddress').textContent = config.school_address || defaultConfig.school_address;
+            document.getElementById('footerSchoolName').textContent = config.school_name || defaultConfig.school_name;
+
+            // Memperbaharui Peta
+            const mapsEmbed = config.google_maps_embed || defaultConfig.google_maps_embed;
+            const mapContainer = document.getElementById('mapContainer');
+            if (mapContainer) {
+                mapContainer.innerHTML = `<iframe src="${mapsEmbed}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+            }
+
+            // Memperbaharui QR
+            const qrCodeUrl = config.qr_code_url || defaultConfig.qr_code_url;
+            const qrCode = document.getElementById('qrCode');
+            if (qrCode) {
+                if (qrCodeUrl && qrCodeUrl.trim() !== '') {
+                    qrCode.src = qrCodeUrl;
+                    qrCode.style.display = 'inline-block';
+                } else {
+                    qrCode.style.display = 'none';
+                }
+            }
+        }
+
+        // Lakukan pengisian data ketika web selesai di-load.
+        document.addEventListener("DOMContentLoaded", () => {
+            updateContent(defaultConfig);
+        });
+
+    </script>
+</body>
+</html>
